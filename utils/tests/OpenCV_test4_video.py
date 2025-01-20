@@ -7,7 +7,7 @@ from picamera2 import Picamera2
 cv2.startWindowThread()
 
 picam2 = Picamera2()
-picam2.configure(picam2.create_preview_configuration(main={"format": 'XRGB8888', "size": (1280, 720)}))
+picam2.configure(picam2.create_preview_configuration(main={"format": 'XRGB8888', "size": (2304, 1296)}))
 
 picam2.set_controls({'HdrMode': libcamera.controls.HdrModeEnum.SingleExposure})
 picam2.start()
