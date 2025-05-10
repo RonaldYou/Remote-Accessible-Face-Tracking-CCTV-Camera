@@ -1,0 +1,37 @@
+from gpiozero import PWMOutputDevice #15.2.2 in documentation
+from time import sleep
+
+DUTY_CYCLE_PER_DEGREE = (0.1 - 0.01)/180
+
+class PTZ:
+    def __init__(self, basePin, eUnitPin, initialBaseDC, initialeUnitDC):
+        self.base = PWMOutputDevice(basePin, frequency = 50)
+        self.eUnit = PWMOutputDevice(eUnitPin, frequency = 50)
+        self.currentBaseDC = initialBaseDC
+        self.currenteUnitDC = initialeUnitDC
+        self.base.value = self.currentBaseDC
+        self.eUnit.value = self.currenteUnitDC
+        sleep(0.5) #make dynamic?
+        self.base.off()
+        self.eUnit.off()
+        
+    def move(baseAngle, elevationAngle):
+        # 180 degrees is from 0.01 to 0.1
+        #eUnit (elevation unit):
+        #	min value: 0.03
+        #	max value: 0.11
+        #	less than 180 degrees
+        #base:
+        #	min value: 0.03
+        #	max value: 0.13
+        #	full 180 degrees
+        self.base.value = self.currentBaseDC + baseAngle * DUTY_CYCLE_PER_DEGREE
+        self.eUnit.value = self.currenteUnitDC + elevationAngle * DUTY_CYCLE_PER_DEGREE
+        sleep(0.5)
+        self.base.off()
+        self.eUnit.off()
+        
+                
+    
+
+
