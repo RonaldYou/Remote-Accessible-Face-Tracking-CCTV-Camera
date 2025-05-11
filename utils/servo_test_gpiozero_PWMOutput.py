@@ -11,7 +11,6 @@ print("moving 1")
 servo1.value = 0.03 #min value on mount
 servo2.value = 0.025
 sleep(0.5)
-print(servo1.value)
 servo1.off()
 servo2.off()
 sleep(1.5)

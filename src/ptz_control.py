@@ -14,8 +14,9 @@ class PTZ:
         sleep(0.5) #make dynamic?
         self.base.off()
         self.eUnit.off()
+        sleep(0.1)
         
-    def move(baseAngle, elevationAngle):
+    def move(self, baseAngle, elevationAngle):
         # 180 degrees is from 0.01 to 0.1
         #eUnit (elevation unit):
         #	min value: 0.03
@@ -25,11 +26,21 @@ class PTZ:
         #	min value: 0.03
         #	max value: 0.13
         #	full 180 degrees
-        self.base.value = self.currentBaseDC + baseAngle * DUTY_CYCLE_PER_DEGREE
-        self.eUnit.value = self.currenteUnitDC + elevationAngle * DUTY_CYCLE_PER_DEGREE
+        sleep(0.5)
+        print(f"Moving base by {baseAngle} degrees and elevation by {elevationAngle}")
+        newBaseDC = round(self.currentBaseDC + baseAngle * DUTY_CYCLE_PER_DEGREE,3)
+        neweUnitDC = round(self.currenteUnitDC + elevationAngle * DUTY_CYCLE_PER_DEGREE,3)
+        print(f"Moving base from {self.currentBaseDC} to  {newBaseDC}, moving e from {self.currenteUnitDC} to {neweUnitDC}")
+        self.base.value = newBaseDC
+        self.eUnit.value = neweUnitDC
+        
         sleep(0.5)
         self.base.off()
         self.eUnit.off()
+        
+        self.currentBaseDC = newBaseDC
+        self.currenteUnitDC = neweUnitDC
+        
         
                 
     
