@@ -42,7 +42,9 @@ class PTZ:
         self.currenteUnitDC = neweUnitDC
         
         
-                
+def PTZControl(ptz, q):
+    print("i")
     
+
 
 
