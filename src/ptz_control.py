@@ -43,7 +43,9 @@ class PTZ:
         
         
 def PTZControl(ptz, q):
-    print("i")
+    while True:
+        centreX, centreY = q.get()
+        print(centreX, centreY)
     
 
 

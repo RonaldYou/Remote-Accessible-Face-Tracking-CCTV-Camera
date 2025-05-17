@@ -4,6 +4,8 @@ import threading
 from time import sleep
 from queue import Queue
 
+FRAME_W = 2304
+FRAME_H = 1296
 
 if __name__ == "__main__":
     ptz = PTZ(27,17,0.062,0.11)

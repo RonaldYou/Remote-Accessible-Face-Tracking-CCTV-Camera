@@ -35,7 +35,7 @@ def CameraControl(cam, q):
     while True:
         frame = picam2.capture_array("main")
         frame, centreX, centreY = cam.detect(frame)
-        print(centreX, centreY)
+        q.put((centreX, centreY))
         cv2.imshow("Camera", frame)
         if cv2.waitKey(1) == ord('q'):
             break
