@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from ptz_control import PTZControl, PTZ
 from camera import CameraControl, CAM
 import threading

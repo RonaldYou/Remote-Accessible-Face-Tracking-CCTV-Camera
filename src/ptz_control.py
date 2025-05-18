@@ -81,7 +81,7 @@ def PTZControl(ptz: PTZ, q: Queue, frame_w: int, frame_h: int):
         dx = centre_x - (frame_w / 2)
         dy = centre_y - (frame_h / 2)
 
-        if abs(dx) <= H_THRESHOLD and abs(dy) <= V_THRESHOLD:
+        if abs(dx) <= H_THRESHOLD or abs(dy) <= V_THRESHOLD:
             continue  # Ignore minor jitter
 
         move_base = DEGREE_PER_PIXEL_W * dx if abs(dx) > H_THRESHOLD else 0
