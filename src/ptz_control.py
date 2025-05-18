@@ -30,6 +30,17 @@ class PTZ:
         print(f"Moving base by {baseAngle} degrees and elevation by {elevationAngle}")
         newBaseDC = round(self.currentBaseDC + baseAngle * DUTY_CYCLE_PER_DEGREE,3)
         neweUnitDC = round(self.currenteUnitDC + elevationAngle * DUTY_CYCLE_PER_DEGREE,3)
+        
+        if(newBaseDC < 0.03):
+            newBaseDC = 0.03
+        elif(newBaseDC > 0.13):
+            newBaseDC = 0.13
+            
+        if(neweUnitDC < 0.03):
+            neweUnitDC = 0.03
+        elif(neweUnitDC > 0.11):
+            neweUnitDC = 0.11
+            
         print(f"Moving base from {self.currentBaseDC} to  {newBaseDC}, moving e from {self.currenteUnitDC} to {neweUnitDC}")
         self.base.value = newBaseDC
         self.eUnit.value = neweUnitDC
@@ -50,7 +61,7 @@ def PTZControl(ptz, q, frame_w, frame_h):
     
     while True:
         centreX, centreY = q.get()
-        print(f"{centreX}, {centreY} | {OLD_X}, {OLD_Y}")
+        print(f"{centreX}, {centreY}")
         move_base = 0
         move_e = 0
         if(centreX == -1 or centreY == -1):
@@ -64,7 +75,7 @@ def PTZControl(ptz, q, frame_w, frame_h):
         if(abs(centreY - frame_h/2) <= 100):
             continue
         else:
-            move_e = -DEGREE_PER_PIXEL_H * (centreY - frame_h/2)
+            move_e = DEGREE_PER_PIXEL_H * (centreY - frame_h/2)
             
         ptz.move(move_base, move_e)
         
