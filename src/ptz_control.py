@@ -46,22 +46,28 @@ class PTZ:
 def PTZControl(ptz, q, frame_w, frame_h):
     #width: 1152 pixels per 45 degrees
     DEGREE_PER_PIXEL_W = 45/1152
-    DEGREE_PER_PIXEL_H = 0
-    OLD_X = -1
-    OLD_Y = -1
+    DEGREE_PER_PIXEL_H = 15/648
     
     while True:
         centreX, centreY = q.get()
+        print(f"{centreX}, {centreY} | {OLD_X}, {OLD_Y}")
+        move_base = 0
+        move_e = 0
         if(centreX == -1 or centreY == -1):
             continue
         #check distance from OLD detection
-        if(abs(sqrt(centreX**2 + centreY**2) - sqrt(OLD_X**2 + OLD_Y**2)) <= 100):
+        if(abs(centreX - frame_w/2) <= 250):
             continue
+        else:
+            move_base = DEGREE_PER_PIXEL_W * (centreX - frame_w/2)
+            
+        if(abs(centreY - frame_h/2) <= 100):
+            continue
+        else:
+            move_e = -DEGREE_PER_PIXEL_H * (centreY - frame_h/2)
+            
+        ptz.move(move_base, move_e)
         
-        
-        
-        #ptz
-    
 
 
 
