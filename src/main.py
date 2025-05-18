@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from ptz_control import PTZControl, PTZ
 from camera import CameraControl, CAM
 import threading
@@ -19,6 +20,5 @@ if __name__ == "__main__":
     
     ptzThread.start()
     camThread.start()
-    
     
     
