@@ -1,10 +1,15 @@
 from picamera2 import Picamera2, Preview
 from libcamera import *
+from queue import Queue
 import cv2
 
 picam2 = Picamera2()
 
 class CAM:
+    """
+    Camera class for capturing frames and detecting faces using OpenCV and PiCamera2.
+    """
+    
     def __init__(self):
         mode = picam2.sensor_modes[1]
         picam2.video_configuration.transform = Transform(vflip=True)
@@ -31,7 +36,11 @@ class CAM:
         return frame, centreX, centreY
         
         
-def CameraControl(cam, q):
+def CameraControl(cam: CAM, q: Queue):
+    """
+    Continuously captures frames, detects faces, and sends their center to the queue.
+    Displays the annotated video stream in a window.
+    """
     while True:
         frame = picam2.capture_array("main")
         frame, centreX, centreY = cam.detect(frame)
