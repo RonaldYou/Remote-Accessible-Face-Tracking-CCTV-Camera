@@ -42,10 +42,25 @@ class PTZ:
         self.currenteUnitDC = neweUnitDC
         
         
-def PTZControl(ptz, q):
+        
+def PTZControl(ptz, q, frame_w, frame_h):
+    #width: 1152 pixels per 45 degrees
+    DEGREE_PER_PIXEL_W = 45/1152
+    DEGREE_PER_PIXEL_H = 0
+    OLD_X = -1
+    OLD_Y = -1
+    
     while True:
         centreX, centreY = q.get()
-        print(centreX, centreY)
+        if(centreX == -1 or centreY == -1):
+            continue
+        #check distance from OLD detection
+        if(abs(sqrt(centreX**2 + centreY**2) - sqrt(OLD_X**2 + OLD_Y**2)) <= 100):
+            continue
+        
+        
+        
+        #ptz
     
 
 

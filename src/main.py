@@ -13,7 +13,7 @@ if __name__ == "__main__":
     
     coordQ = Queue()
     
-    ptzThread = threading.Thread(target=PTZControl, args=(ptz,coordQ))
+    ptzThread = threading.Thread(target=PTZControl, args=(ptz,coordQ, FRAME_W, FRAME_H))
     camThread = threading.Thread(target=CameraControl, args=(cam,coordQ))
     
     
