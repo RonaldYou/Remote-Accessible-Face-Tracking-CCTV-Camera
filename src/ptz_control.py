@@ -1,5 +1,6 @@
 from gpiozero import PWMOutputDevice
 from time import sleep
+from queue import Queue
 
 # Constants for PWM duty cycle range
 BASE_DUTY_MIN, BASE_DUTY_MAX = 0.03, 0.13
